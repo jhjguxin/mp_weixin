@@ -1,0 +1,7 @@
+--color
+--format progress
+#--format nested
+--debug
+--drb
+-f documentation
+#-I controllers

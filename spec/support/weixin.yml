@@ -1,0 +1,13 @@
+defaults: &defaults
+  app_id: "12341432134"
+  app_secret: "app_secret"
+  redirect_uri: "http://weixin.guanxi.me"
+  url: "http://weixin.guanxi.me"
+  token: "guanxi"
+
+development:
+  <<: *defaults
+production:
+  <<: *defaults
+test:
+  <<: *defaults
