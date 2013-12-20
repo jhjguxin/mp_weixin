@@ -1,0 +1,2 @@
+module MpWeixin
+end

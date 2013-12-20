@@ -57,7 +57,7 @@ Or install it yourself as:
 - 生成带参数的二维码 [NOPLAN]
 
 
-### The Structure
+## The Structure
 
 ```shell
 $ tree lib/ -L 3
@@ -75,11 +75,11 @@ lib/
 
 ### client:
 
-which initiate with an `app_id` and `app_secret` who have ability to request interface provider by 'https://api.weixin.qq.com'. Of course at first you must been authorize. Those include '发送客服消息', '用户管理', '自定义菜单'.
+which initiate with an `app_id` and `app_secret` who have ability to request interface provider by 'https://api.weixin.qq.com'. Of course at first you must been authorize. Those include `发送客服消息`, `用户管理`, `自定义菜单`.
 
 ### server
 
-It's a web service, used to receive all the http request from 'weixin server', and give and rigth response. those response include '接收消息', '发送被动响应消息'.
+It's a web service, used to receive all the http request from 'weixin server', and give and rigth response. those response include `接收消息`, `发送被动响应消息`.
 
 ## Usage
 
