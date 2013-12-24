@@ -2,12 +2,9 @@ require "spec_helper"
 
 describe MpWeixin::Client do
   let(:client) { MpWeixin::Client.new }
+  let(:access_token) { 'ACCESS_TOKEN' }
+  let(:token_hash) { {"expires_in" => "7200", "access_token" => access_token} }
 
-  let(:access_token) { double(:app_id => "app_id", :app_secret => "app_secret") }
-
-  before(:each) do
-    client.stub(:access_token).and_return(access_token)
-  end
 
   context "#initialize config" do
     it "should have correct site" do
@@ -28,7 +25,6 @@ describe MpWeixin::Client do
   end
 
   context "#taken_code" do
-    let(:code) {'sushi'}
     let(:json_token) {MultiJson.encode(:expires_in => 7200, :access_token => 'salmon')}
 
     let(:client) do
@@ -53,6 +49,34 @@ describe MpWeixin::Client do
 
     it "returns AccessToken with #token" do
       expect(subject.token.token).to eq('salmon')
+    end
+
+    it 'is_authorized? should been true' do
+      expect(subject.is_authorized?).to eq(true)
+    end
+  end
+
+  context "get_token_from_hash" do
+    subject { client.get_token_from_hash(token_hash) }
+
+    it "return token the initalized AccessToken" do
+      expect(subject).to be_a(MpWeixin::AccessToken)
+    end
+
+    it "return token with provide access_token" do
+      expect(subject.token).to eq(access_token)
+    end
+  end
+
+  context "#from_hash" do
+    subject { MpWeixin::Client.from_hash(token_hash) }
+
+    it "return client the initalized Client" do
+      expect(subject).to be_a(MpWeixin::Client)
+    end
+
+    it "return token with provide access_token" do
+      expect(subject.token.token).to eq(access_token)
     end
 
     it 'is_authorized? should been true' do

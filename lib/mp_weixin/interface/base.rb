@@ -10,7 +10,8 @@ module MpWeixin
       def default_request_params
         access_token = @client.token.token
         #request_params = {"oauth_consumer_key" => self.id, "access_token" => access_token, "openid" => params["openid"], "oauth_version" => "2.a", "scope" => "all"}
-        {"openid" => @client.id, "access_token" => access_token}
+        # {"appid" => @client.id, "access_token" => access_token}
+        {"access_token" => access_token}
       end
 
       def request(verb, path, opts={}, &block)
@@ -19,7 +20,7 @@ module MpWeixin
         end
 
         opts[:params] ||= {}
-        opts[:params].merge!(default_request_params)
+        #opts[:params].merge!(default_request_params)
         opts = ActiveSupport::HashWithIndifferentAccess.new(opts)
 
         response = @client.token.request(verb, path, opts, &block)

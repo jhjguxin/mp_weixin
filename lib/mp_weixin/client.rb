@@ -138,5 +138,48 @@ module MpWeixin
       raise Error.new(response) if options[:raise_errors] && !(response.parsed.is_a?(Hash) && response.parsed['access_token'])
       @token = access_token_class.from_hash(self, response.parsed.merge(access_token_opts))
     end
+
+    # Initializes an AccessToken from a hash
+    #
+    # @param [Hash] hash a Hash contains access_token and expires
+    # @return [AccessToken] the initalized AccessToken
+    def get_token_from_hash(hash)
+      access_token = hash.delete('access_token') || hash.delete(:access_token) || hash.delete('oauth_token') || hash.delete(:oauth_token)
+      opts = {:expires_at => hash["expires"] || hash[:expires],
+              :header_format => "OAuth2 %s",
+              :param_name => "access_token"}
+
+      @token = AccessToken.new(self, access_token, opts)
+    end
+
+    # Initializes a new Client from a hash
+    #
+    # @param [Hash] a Hash contains access_token and expires
+    # @param [Hash] opts the options to create the client with
+    # @option opts [Hash] :connection_opts ({}) Hash of connection options to pass to initialize Faraday with
+    # @option opts [FixNum] :max_redirects (5) maximum number of redirects to follow
+    # @yield [builder] The Faraday connection builder
+    def self.from_hash(hash, opts={}, &block)
+      client = self.new(opts, &block)
+      client.get_token_from_hash(hash)
+
+      client
+    end
+
+    #
+    # APIs
+    #
+
+    def message
+      @message ||= Interface::Message.new(self)
+    end
+
+    def menu
+      @menu ||= Interface::Menu.new(self)
+    end
+
+    def promotion
+      @promotion ||= Interface::Promotion.new(self)
+    end
   end
 end

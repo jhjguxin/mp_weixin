@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ### 基础支持
 
-- 获取access token [TODO]
+- 获取access token [DONE]
 - 全局返回码说明 [TODO]
 - [接口频率限制说明](http://mp.weixin.qq.com/wiki/index.php?title=%E6%8E%A5%E5%8F%A3%E9%A2%91%E7%8E%87%E9%99%90%E5%88%B6%E8%AF%B4%E6%98%8E) [NOPLAN]
 - 上传下载多媒体文件 [TODO]
@@ -34,7 +34,7 @@ Or install it yourself as:
 ### 发送消息
 
 - 发送被动响应消息 [TODO]
-- 发送客服消息 [TODO]
+- 发送客服消息 [DONE]
 
 ### 用户管理
 
@@ -47,14 +47,14 @@ Or install it yourself as:
 
 ### 自定义菜单
 
-- 自定义菜单创建接口 [TODO]
-- 自定义菜单查询接口 [TODO]
-- 自定义菜单删除接口 [TODO]
-- 自定义菜单事件推送 [TODO]
+- 自定义菜单创建接口 [DONE]
+- 自定义菜单查询接口 [DONE]
+- 自定义菜单删除接口 [DONE]
+- 自定义菜单事件推送 [DONE]
 
 ### 推广支持
 
-- 生成带参数的二维码 [NOPLAN]
+- 生成带参数的二维码 [DONE]
 
 
 ## The Structure
