@@ -39,4 +39,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'webmock'
   # A Ruby implementation of the Coveralls API.
   spec.add_development_dependency "coveralls"
+  spec.add_development_dependency "travis-lint"
 end
