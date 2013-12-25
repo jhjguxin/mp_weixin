@@ -2,6 +2,9 @@
 
 A wrapper for weiXin MP platform
 
+[![Build
+Status](https://secure.travis-ci.org/jhjguxin/mp_weixin.png?branch=master&.png)](http://travis-ci.org/jhjguxin/mp_weixin)
+
 ## Installation
 
 Add this line to your application's Gemfile:
