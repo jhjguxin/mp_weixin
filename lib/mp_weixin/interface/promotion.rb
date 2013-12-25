@@ -31,9 +31,10 @@ module MpWeixin
       # 提醒：TICKET记得进行UrlEncode
 
       # @see http://mp.weixin.qq.com/wiki/index.php?title=%E7%94%9F%E6%88%90%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81
-      def showqrcode(ticket = nil)
-        if ticket.present?
-          opts = {ticket: ticket}
+      def showqrcode(arg = nil)
+        if arg.present?
+          opts = arg.is_a?(Hash) ? arg : {ticket: arg}
+
           get '/cgi-bin/showqrcode', :params => opts.merge(default_request_params) do |req|
             req.url 'https://mp.weixin.qq.com/cgi-bin/showqrcode', default_request_params
             req

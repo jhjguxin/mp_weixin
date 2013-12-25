@@ -38,11 +38,11 @@ Or install it yourself as:
 
 ### 用户管理
 
-- 分组管理接口 [TODO]
-- 获取用户基本信息 [TODO]
-- 获取关注者列表 [TODO]
+- 分组管理接口 [DONE]
+- 获取用户基本信息 [DONE]
+- 获取关注者列表 [DONE]
 - 获取用户地理位置 [TODO]
-- 网页授权获取用户基本信息 [NOPLAN]
+- 网页授权获取用户基本信息 [DONE] [prefer](https://github.com/jhjguxin/open_weixin/)
 - 网页获取用户网络状态（JS接口）[NOPLAN]
 
 ### 自定义菜单

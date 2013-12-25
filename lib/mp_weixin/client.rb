@@ -170,16 +170,29 @@ module MpWeixin
     # APIs
     #
 
+    # assocation an Interface::Message instance to client
     def message
       @message ||= Interface::Message.new(self)
     end
 
+    # assocation an Interface::Menu instance to client
     def menu
       @menu ||= Interface::Menu.new(self)
     end
 
+    # assocation an Interface::Promotion instance to client
     def promotion
       @promotion ||= Interface::Promotion.new(self)
+    end
+
+    # assocation an Interface::Group instance to client
+    def group
+      @group ||= Interface::Group.new(self)
+    end
+
+    # assocation an Interface::User instance to client
+    def group
+      @user ||= Interface::User.new(self)
     end
   end
 end

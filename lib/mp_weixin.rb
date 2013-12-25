@@ -25,6 +25,8 @@ require "mp_weixin/interface/base"
 require "mp_weixin/interface/message"
 require "mp_weixin/interface/menu"
 require "mp_weixin/interface/promotion"
+require "mp_weixin/interface/group"
+require "mp_weixin/interface/user"
 
 require "mp_weixin/client"
 

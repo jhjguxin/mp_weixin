@@ -62,7 +62,7 @@ describe MpWeixin::Interface::Menu do
     end
 
     it "get_menu menu have been created" do
-      expect(subject.get_menu.body).to eq(menu_create_json)
+      expect(subject.get_menus.body).to eq(menu_create_json)
     end
 
     it "delete menu have been created" do
