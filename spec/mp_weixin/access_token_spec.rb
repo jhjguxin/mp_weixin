@@ -1,6 +1,5 @@
+# encoding: utf-8
 require "spec_helper"
-
-# VERBS = [:get, :post]
 
 describe MpWeixin::AccessToken do
   let(:token) {'ACCESS_TOKEN'}

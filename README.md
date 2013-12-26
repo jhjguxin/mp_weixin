@@ -3,7 +3,7 @@
 A wrapper for weiXin MP platform
 
 [![Build
-Status](https://secure.travis-ci.org/jhjguxin/mp_weixin.png)](http://travis-ci.org/jhjguxin/mp_weixin)
+Status](https://travis-ci.org/jhjguxin/mp_weixin.png)](http://travis-ci.org/jhjguxin/mp_weixin)
 
 ## Installation
 
@@ -83,6 +83,17 @@ which initiate with an `app_id` and `app_secret` who have ability to request int
 ### server
 
 It's a web service, used to receive all the http request from 'weixin server', and give and rigth response. those response include `接收消息`, `发送被动响应消息`.
+
+want it should been like?
+
+1.  first it should been a web service, it should have ability to '验证消息真实性', '接收普通消息
+', '发送被动响应消息', '接收事件推送', '接收语音识别结果'.
+2.  then I want it should can match some custom rules(like rails route)
+3.  all of those rule's return will response to 'https://api.weixin.qq.com'
+
+### models
+
+some base data model used by [mp_weixin] eg `message`, `event`. Those model should have some usefully method been defined.
 
 ## Usage
 

@@ -1,3 +1,4 @@
+# encoding: utf-8
 module MpWeixin
   # The MpWeixin::Client class
   # reference to The OAuth2::Client class

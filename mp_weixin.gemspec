@@ -31,8 +31,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "thin"
   spec.add_development_dependency "debugger"
   spec.add_development_dependency "bundler"
-  spec.add_development_dependency 'rspec'
   spec.add_development_dependency "rake"
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'rack-test'
   # Code coverage for Ruby 1.9+ with a powerful configuration library and automatic merging of coverage across test suites
   spec.add_development_dependency 'simplecov'
   # WebMock allows stubbing HTTP requests and setting expectations on HTTP requests.
