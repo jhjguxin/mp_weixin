@@ -30,10 +30,15 @@ module MpWeixin
     #
     # can rely with instance of those class eg, TextReplyMessage, ImageReplyMessage, VoiceReplyMessage
     # VideoReplyMessage, MusicReplyMessage, NewsReplyMessage
+    # quickly generate reply content through call 'reply_#{msg_type}_message(attributes).to_xml' @see 'spec/mp_weixin/server_helper_spec.rb'
+    #
     def response_message(request, message, &block)
       if block_given?
         block.call(request, message)
       end
+
+      # reply with
+      # reply_#{msg_type}_message(attributes).to_xml
     end
   end
 end

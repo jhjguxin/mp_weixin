@@ -32,5 +32,63 @@ module MpWeixin
       local_signature = generate_signature(token,timestamp,nonce)
       local_signature.eql? signature
     end
+
+    # initialize an TextReplyMessage
+    # @param [Hash] attributes
+    # @see 'spec/mp_weixin/models/reply_message_spec.rb'
+    def reply_text_message(attributes = {})
+      MpWeixin::TextReplyMessage.new(attributes)
+    end
+
+    # initialize an ImageReplyMessage
+    # @param [Hash] attributes
+    # @see 'spec/mp_weixin/models/reply_message_spec.rb'
+    def reply_image_message(attributes = {}, &block)
+      reply_message = MpWeixin::ImageReplyMessage.new(attributes)
+      block.call(reply_message) if block_given?
+
+      reply_message
+    end
+
+    # initialize an VoiceReplyMessage
+    # @param [Hash] attributes
+    # @see 'spec/mp_weixin/models/reply_message_spec.rb'
+    def reply_voice_message(attributes = {}, &block)
+      reply_message = MpWeixin::VoiceReplyMessage.new(attributes)
+      block.call(reply_message) if block_given?
+
+      reply_message
+    end
+
+    # initialize an VideoReplyMessage
+    # @param [Hash] attributes
+    # @see 'spec/mp_weixin/models/reply_message_spec.rb'
+    def reply_video_message(attributes = {}, &block)
+      reply_message = MpWeixin::VideoReplyMessage.new(attributes)
+      block.call(reply_message) if block_given?
+
+      reply_message
+    end
+
+    # initialize an MusicReplyMessage
+    # @param [Hash] attributes
+    # @see 'spec/mp_weixin/models/reply_message_spec.rb'
+    def reply_music_message(attributes = {}, &block)
+      reply_message = MpWeixin::MusicReplyMessage.new(attributes)
+      block.call(reply_message) if block_given?
+
+      reply_message
+    end
+
+    # initialize an NewsReplyMessage
+    # @param [Hash] attributes
+    # @see 'spec/mp_weixin/models/reply_message_spec.rb'
+    def reply_news_message(attributes = {}, &block)
+      reply_message = MpWeixin::NewsReplyMessage.new(attributes)
+
+      block.call(reply_message) if block_given?
+
+      reply_message
+    end
   end
 end
