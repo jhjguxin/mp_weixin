@@ -15,6 +15,8 @@ require 'faraday'
 require 'active_model'
 require 'active_support/all'
 
+require 'support/active_model'
+
 require "mp_weixin/version"
 require "mp_weixin/config"
 require "mp_weixin/error"

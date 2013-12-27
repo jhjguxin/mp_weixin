@@ -1,5 +1,5 @@
 # encoding: utf-8
-#bellow code to initialize the BabyTime
+#bellow code to initialize the mp_weixin
 MpWeixinConfig = YAML.load_file("./spec/support/weixin.yml")["test"].symbolize_keys
 MpWeixin::Config.app_id = MpWeixinConfig[:app_id]
 MpWeixin::Config.app_secret = MpWeixinConfig[:app_secret]
