@@ -115,6 +115,97 @@ some base data model used by [mp_weixin] eg `message`, `event`. Those model shou
 
 ## Usage
 
+- [server](lib/mp_weixin/server.rb)
+- [client](lib/mp_weixin/client.rb)
+
+### how boot mp_weixin
+
+config `mp_weixin.yml` (eg `spec/support/weixin.yml`)
+
+```yml
+defaults: &defaults
+  app_id: "12341432134"
+  app_secret: "app_secret"
+  url: "http://www.example.com"
+  token: "secret"
+
+development:
+  <<: *defaults
+production:
+  <<: *defaults
+test:
+  <<: *defaults
+```
+
+initializer the MpWeixin (eg `spec/support/mp_weixin.rb`)
+
+### usually usage
+
+launch `MpWeixin::Server`
+
+create file `config.ru`
+
+```ruby
+require 'rubygems'
+require 'bundler'
+
+Bundler.require
+
+# require 'mp_weixin'
+
+run MpWeixin::Server
+# rackup config.ru
+```
+
+mount with Rails application, open `config/route.rb` insert bellow code
+
+```ruby
+# require 'mp_weixin'
+mount MpWeixin::Server => '/weixin'
+```
+then rewrite methods inside 'lib/mp_weixin/response_rule.rb'
+
+```ruby
+# handle corrent data post from weixin
+#
+# please @rewrite me
+def handle_message(request, message)
+  #
+end
+
+# 发送被动响应消息'
+#
+# please @rewrite me
+#
+#
+# can rely with instance of those class eg, TextReplyMessage, ImageReplyMessage, VoiceReplyMessage
+# VideoReplyMessage, MusicReplyMessage, NewsReplyMessage
+# quickly generate reply content through call 'reply_#{msg_type}_message(attributes).to_xml' @see 'spec/mp_weixin/server_helper_spec.rb'
+#
+def response_message(request, message, &block)
+  if block_given?
+    block.call(request, message)
+  end
+
+  # reply with
+  # reply_#{msg_type}_message(attributes).to_xml
+end
+```
+
+through `MpWeixin::Client` module request some api interface at 'weixin'
+
+```ruby
+# initalize and get new access_token
+client = MpWeixin::Client.new
+client.get_token
+# initalize with exists access_token
+token_hash = {"expires_in" => "7200", "access_token" => access_token}
+client = MpWeixin::Client.from_hash(token_hash)
+
+client.menu.get_menus
+# more detail check 'spec/mp_weixin/interface/'
+```
+
 TODO: Write usage instructions here
 
 
