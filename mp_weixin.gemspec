@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["jhjguxin"]
   spec.email         = ["864248765@qq.com"]
   spec.description   = %q{A wrapper for weiXin MP platform}
-  spec.summary       = %q{基于 Ruby 的微信公众平台接口实现}
+  spec.summary       = %q{A Ruby wrapper for weixin MP platform}
   spec.homepage      = "https://github.com/jhjguxin/mp_weixin"
   spec.license       = "MIT"
 
