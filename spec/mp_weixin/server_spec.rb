@@ -21,9 +21,11 @@ describe MpWeixin::Server do
     )
   }
 
+  let(:validated_request_params) { {signature: signature, timestamp: timestamp, nonce: nonce, echostr: echostr} }
+
   context "get '/'" do
     it "should return when all are well" do
-      get '/', signature: signature, timestamp: timestamp, nonce: nonce, echostr: echostr
+      get '/', validated_request_params
       last_response.body.should eq(echostr)
     end
 
@@ -34,13 +36,20 @@ describe MpWeixin::Server do
   end
 
   context "#post '/'" do
+    let(:post_uri) {
+      uri = URI("/")
+      uri.query = validated_request_params.to_param
+      # could not use instance of URI
+      uri.to_s
+    }
+
     it "should return empty string when post invalide data" do
-      post '/', "invalide data"
+      post post_uri, "invalide data"
       last_response.status.should eq(400)
     end
 
     it "should return status 200 when post corrent data" do
-      post '/', text_message_xml
+      post post_uri, text_message_xml
       last_response.status.should eq(200)
     end
   end

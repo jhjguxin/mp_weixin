@@ -2,8 +2,11 @@
 
 A wrapper for weiXin MP platform
 
-[![Build
-Status](https://travis-ci.org/jhjguxin/mp_weixin.png)](http://travis-ci.org/jhjguxin/mp_weixin)
+[![Gem Version](https://badge.fury.io/rb/mp_weixin.png)][gem]
+[![Build Status](https://travis-ci.org/jhjguxin/mp_weixin.png?branch=master)][travis]
+[![Dependency Status](https://gemnasium.com/jhjguxin/mp_weixin.png?travis)][gemnasium]
+[![Code Climate](https://codeclimate.com/github/jhjguxin/mp_weixin.png)][codeclimate]
+[![Coverage Status](https://coveralls.io/repos/jhjguxin/mp_weixin/badge.png?branch=master)][coveralls]
 
 ## Installation
 
@@ -29,14 +32,14 @@ Or install it yourself as:
 - 上传下载多媒体文件 [TODO]
 
 ### 接收消息
-- 验证消息真实性 [TODO]
-- 接收普通消息 [TODO]
-- 接收事件推送 [TODO]
-- 接收语音识别结果 [TODO]
+- 验证消息真实性 [DONE]
+- 接收普通消息 [DONE]
+- 接收事件推送 [DONE]
+- 接收语音识别结果 [DONE]
 
 ### 发送消息
 
-- 发送被动响应消息 [TODO]
+- 发送被动响应消息 [DONE]
 - 发送客服消息 [DONE]
 
 ### 用户管理
@@ -68,9 +71,24 @@ lib/
 ├── config
 │   └── mp_weixin_error.yml
 ├── mp_weixin
+│   ├── access_token.rb
 │   ├── client.rb
+│   ├── config.rb
+│   ├── error.rb
 │   ├── interface
+│   │   ├── base.rb
+│   │   ├── group.rb
+│   │   ├── menu.rb
+│   │   ├── message.rb
+│   │   ├── promotion.rb
+│   │   └── user.rb
 │   ├── models
+│   │   ├── event.rb
+│   │   ├── message.rb
+│   │   └── reply_message.rb
+│   ├── response.rb
+│   ├── response_rule.rb
+│   ├── server_helper.rb
 │   ├── server.rb
 │   └── version.rb
 └── mp_weixin.rb
@@ -98,6 +116,9 @@ some base data model used by [mp_weixin] eg `message`, `event`. Those model shou
 ## Usage
 
 TODO: Write usage instructions here
+
+
+more detail pls check `spec/`
 
 ## Contributing
 
