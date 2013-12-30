@@ -84,4 +84,28 @@ describe MpWeixin::Client do
       expect(subject.is_authorized?).to eq(true)
     end
   end
+
+  context "#apis" do
+    subject { MpWeixin::Client.from_hash(token_hash) }
+
+    it "should have instance of Interface::Message" do
+      expect(subject.message).to be_a(MpWeixin::Interface::Message)
+    end
+
+    it "should have instance of Interface::Menu" do
+      expect(subject.menu).to be_a(MpWeixin::Interface::Menu)
+    end
+
+    it "should have instance of Interface::Promotion" do
+      expect(subject.promotion).to be_a(MpWeixin::Interface::Promotion)
+    end
+
+    it "should have instance of Interface::Group" do
+      expect(subject.group).to be_a(MpWeixin::Interface::Group)
+    end
+
+    it "should have instance of Interface::User" do
+      expect(subject.user).to be_a(MpWeixin::Interface::User)
+    end
+  end
 end

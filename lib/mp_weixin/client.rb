@@ -192,7 +192,7 @@ module MpWeixin
     end
 
     # assocation an Interface::User instance to client
-    def group
+    def user
       @user ||= Interface::User.new(self)
     end
   end
