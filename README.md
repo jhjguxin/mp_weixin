@@ -169,6 +169,69 @@ client = MpWeixin::Client.from_hash(token_hash)
 
 client.menu.get_menus
 # more detail check 'spec/mp_weixin/interface/'
+```
+
+#### demo how guanxi use MpWeixin::Client
+
+```ruby
+# encoding: utf-8
+class WechatClient
+  include Mongoid::Document
+  include Mongoid::Timestamps
+
+  field :access_token, type: String
+  field :expires_at, type: Integer
+
+  class << self
+    attr_accessor :wechat_client
+
+    def get_access_token
+      wechat_client = self.first || self.new
+
+      {
+        access_token: wechat_client.access_token,
+        expires_at: wechat_client.expires_at.try(:to_i)
+      }.keep_if{|_, v| v.present?}
+    end
+    def set_access_token(access_token, expires_at)
+      wechat_client = self.first || self.new
+
+      wechat_client.update_attributes(
+                                             access_token: access_token,
+                                             expires_at: expires_at
+                                           )
+    end
+
+    # return an instance of MpWeixin#client with 'is_authorized?' is true
+    #
+    # client = WechatClient.this_client
+    # client.message.custom_send(touser: "ozIMPt8wb8I8iYm-IjD1DHP-IQ9s", msgtype: "text", text: {content: "hey, we found you!"})
+    def this_client
+      unless @wechat_client.try("is_authorized?")
+        @wechat_client = fresh_client
+      end
+
+      @wechat_client
+    end
+
+    def fresh_client
+      token_hash = WechatClient.get_access_token
+      expires_at_time = Time.at(token_hash[:expires_at]) rescue 2.hours.from_now
+
+      if token_hash[:access_token].present? and (expires_at_time > Time.now)
+        client = MpWeixin::Client.from_hash(token_hash)
+      else
+        client = MpWeixin::Client.new
+        client.get_token
+
+        WechatClient.set_access_token(client.token.token, client.token.expires_at)
+      end
+
+      client
+    end
+  end
+end
+```
 
 ### start weixin mp server
 
