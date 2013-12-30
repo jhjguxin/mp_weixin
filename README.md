@@ -189,6 +189,7 @@ def response_message(request, message, &block)
 
   # reply with
   # reply_#{msg_type}_message(attributes).to_xml
+  # or with lazy case 'message.reply_{msg_type}_message(attributes)'
 end
 ```
 

@@ -1,8 +1,23 @@
 # encoding: utf-8
 module MpWeixin
   class Server < Sinatra::Base
-    configure :production, :development do
-      enable :logging
+    configure :production do
+      set :haml, { :ugly=>true }
+      set :clean_trace, true
+      Dir.mkdir('log') unless File.exist?('log')
+
+      $logger = Logger.new("./log/mp_weixin_#{settings.environment}.log",'weekly')
+      $logger.level = Logger::WARN
+
+      # Spit stdout and stderr to a file during production
+      # in case something goes wrong
+      $stdout.reopen("./log/mp_weixin_#{settings.environment}_stdout.log", "a+")
+      $stdout.sync = true
+      $stderr.reopen($stdout)
+    end
+
+    configure :development do
+      $logger = Logger.new(STDOUT)
     end
 
     helpers ServerHelper, ResponseRule

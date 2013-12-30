@@ -91,6 +91,117 @@ describe MpWeixin::Message do
     )
   }
 
+  context :reply do
+    let(:message) { MpWeixin::Message.from_xml(text_message_xml) }
+
+    context :reply_text_message do
+      subject { message.reply_text_message(Content: "hellow") }
+      it "should reply an text message" do
+        expect(subject).to be_a(MpWeixin::TextReplyMessage)
+      end
+
+      it "should have corrent content" do
+        expect(subject.Content).to eq("hellow")
+      end
+    end
+
+    context :reply_image_message do
+      subject { message.reply_image_message(Image: {MediaId: 'media_id'}) }
+      it "should reply an image message" do
+        expect(subject).to be_a(MpWeixin::ImageReplyMessage)
+      end
+
+      it "should have corrent media_id" do
+        expect(subject.Image.MediaId).to eq("media_id")
+      end
+    end
+
+    context :reply_voice_message do
+      subject { message.reply_voice_message(Voice: {MediaId: 'media_id'}) }
+      it "should reply an voice message" do
+        expect(subject).to be_a(MpWeixin::VoiceReplyMessage)
+      end
+
+      it "should have corrent media_id" do
+        expect(subject.Voice.MediaId).to eq("media_id")
+      end
+    end
+
+    context :reply_video_message do
+      subject do
+        message.reply_video_message({
+          Video: {
+            MediaId: "media_id",
+            Title: "title",
+            Description: "description"
+            }
+        })
+      end
+
+      it "should reply an video message" do
+        expect(subject).to be_a(MpWeixin::VideoReplyMessage)
+      end
+
+      it "should have corrent media_id" do
+        expect(subject.Video.MediaId).to eq("media_id")
+      end
+    end
+
+    context :reply_music_message do
+      subject do
+        message.reply_music_message({
+          Music: {
+            Title: "TITLE",
+            Description: "DESCRIPTION",
+            MusicUrl: "MUSIC_Url",
+            HQMusicUrl: "HQ_MUSIC_Url",
+            ThumbMediaId: "media_id"
+          }
+        })
+      end
+      it "should reply an music message" do
+        expect(subject).to be_a(MpWeixin::MusicReplyMessage)
+      end
+
+      it "should have corrent media_id" do
+        expect(subject.Music.ThumbMediaId).to eq("media_id")
+      end
+    end
+
+    context :reply_news_message do
+      subject do
+        message.reply_news_message({
+          ArticleCount: "2",
+          Articles: [
+            {
+              Title: "title1",
+              Description: "description1",
+              PicUrl: "picurl",
+              Url: "url"
+            },
+            {
+              Title: "title",
+              Description: "description",
+              PicUrl: "picurl",
+              Url: "url"
+            }
+          ]
+        })
+      end
+      it "should reply an news message" do
+        expect(subject).to be_a(MpWeixin::NewsReplyMessage)
+      end
+
+      it "should have corrent article_count" do
+        expect(subject.ArticleCount).to eq("2")
+      end
+
+      it "should have corrent title" do
+        expect(subject.Articles[0].Title).to eq("title1")
+      end
+    end
+  end
+
   context "#from_xml" do
     context ":text_message_xml" do
       subject { MpWeixin::Message.from_xml(text_message_xml) }
