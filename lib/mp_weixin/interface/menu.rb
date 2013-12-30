@@ -44,9 +44,10 @@ module MpWeixin
       #
       # @see http://mp.weixin.qq.com/wiki/index.php?title=%E8%87%AA%E5%AE%9A%E4%B9%89%E8%8F%9C%E5%8D%95%E5%88%9B%E5%BB%BA%E6%8E%A5%E5%8F%A3
       def create(opts = nil)
-        opts = opts.to_json if opts.is_a?(Hash)
+        # JSON.generate(user_message.protocol_params, :ascii_only => true)
+        opts_json = JSON.generate(opts, :ascii_only => false) if opts.is_a?(Hash)
 
-        post '/cgi-bin/menu/create', :body => opts, :params => default_request_params
+        post '/cgi-bin/menu/create', :body => opts_json, :params => default_request_params
       end
 
       # 自定义菜单查询接口

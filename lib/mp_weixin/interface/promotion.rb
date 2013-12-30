@@ -19,10 +19,11 @@ module MpWeixin
       # POST数据例子：{"action_name": "QR_LIMIT_SCENE", "action_info": {"scene": {"scene_id": 123}}}
       # @see http://mp.weixin.qq.com/wiki/index.php?title=%E7%94%9F%E6%88%90%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81
       def create(opts = nil)
-        opts = opts.to_json if opts.is_a?(Hash)
+        # JSON.generate(user_message.protocol_params, :ascii_only => true)
+        opts_json = JSON.generate(opts, :ascii_only => false) if opts.is_a?(Hash)
 
         # http://rubydoc.info/gems/faraday/0.5.3/Faraday/Request
-        post '/cgi-bin/qrcode/create', :body => opts, :params => default_request_params
+        post '/cgi-bin/qrcode/create', :body => opts_json, :params => default_request_params
       end
 
       # 自定义菜单查询接口

@@ -28,9 +28,10 @@ module MpWeixin
       # etc
       # @see http://mp.weixin.qq.com/wiki/index.php?title=%E5%8F%91%E9%80%81%E5%AE%A2%E6%9C%8D%E6%B6%88%E6%81%AF
       def custom_send(opts = nil)
-        opts = opts.to_json if opts.is_a?(Hash)
+        # JSON.generate(user_message.protocol_params, :ascii_only => true)
+        opts_json = JSON.generate(opts, :ascii_only => false) if opts.is_a?(Hash)
 
-        post '/cgi-bin/message/custom/send', :body => opts, :params => default_request_params
+        post '/cgi-bin/message/custom/send', :body => opts_json, :params => default_request_params
       end
     end
   end

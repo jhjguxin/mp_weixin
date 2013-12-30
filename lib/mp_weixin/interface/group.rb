@@ -20,9 +20,10 @@ module MpWeixin
       def create(arg = nil)
         if arg.present?
           opts = arg.is_a?(Hash) ? arg : {group: {name: arg}}
-          opts = opts.to_json
+          # JSON.generate(user_message.protocol_params, :ascii_only => true)
+          opts_json = JSON.generate(opts, :ascii_only => false)
 
-          post '/cgi-bin/groups/create', :body => opts, :params => default_request_params
+          post '/cgi-bin/groups/create', :body => opts_json, :params => default_request_params
         end
       end
 
@@ -47,7 +48,10 @@ module MpWeixin
       #
       # @see http://mp.weixin.qq.com/wiki/index.php?title=%E5%88%86%E7%BB%84%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3#.E6.9F.A5.E8.AF.A2.E7.94.A8.E6.88.B7.E6.89.80.E5.9C.A8.E5.88.86.E7.BB.84
       def getid(opts = {})
-        post '/cgi-bin/groups/getid', :body => opts.to_json, :params => default_request_params
+        # JSON.generate(user_message.protocol_params, :ascii_only => true)
+        opts_json = JSON.generate(opts, :ascii_only => false) if opts.is_a?(Hash)
+
+        post '/cgi-bin/groups/getid', :body => opts_json, :params => default_request_params
       end
 
       # 修改分组名
@@ -61,7 +65,10 @@ module MpWeixin
       #
       # @see http://mp.weixin.qq.com/wiki/index.php?title=%E5%88%86%E7%BB%84%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3#.E4.BF.AE.E6.94.B9.E5.88.86.E7.BB.84.E5.90.8D
       def update(opts = {})
-        post '/cgi-bin/groups/update', :body => opts.to_json, :params => default_request_params
+        # JSON.generate(user_message.protocol_params, :ascii_only => true)
+        opts_json = JSON.generate(opts, :ascii_only => false) if opts.is_a?(Hash)
+
+        post '/cgi-bin/groups/update', :body => opts_json, :params => default_request_params
       end
 
       # 移动用户分组
@@ -75,7 +82,10 @@ module MpWeixin
       #
       # @see http://mp.weixin.qq.com/wiki/index.php?title=%E5%88%86%E7%BB%84%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3#.E4.BF.AE.E6.94.B9.E5.88.86.E7.BB.84.E5.90.8D
       def update_memgers(opts = {})
-        post '/cgi-bin/groups/members/update', :body => opts.to_json, :params => default_request_params
+        # JSON.generate(user_message.protocol_params, :ascii_only => true)
+        opts_json = JSON.generate(opts, :ascii_only => false) if opts.is_a?(Hash)
+
+        post '/cgi-bin/groups/members/update', :body => opts_json, :params => default_request_params
       end
     end
   end
