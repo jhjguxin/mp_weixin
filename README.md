@@ -139,9 +139,7 @@ test:
 
 initializer the MpWeixin (eg `spec/support/mp_weixin.rb`)
 
-### usually usage
-
-launch `MpWeixin::Server`
+### launch `MpWeixin::Server`
 
 create file `config.ru`
 
@@ -157,41 +155,7 @@ run MpWeixin::Server
 # rackup config.ru
 ```
 
-mount with Rails application, open `config/route.rb` insert bellow code
-
-```ruby
-# require 'mp_weixin'
-mount MpWeixin::Server => '/weixin'
-```
-then rewrite methods inside 'lib/mp_weixin/response_rule.rb'
-
-```ruby
-# handle corrent data post from weixin
-#
-# please @rewrite me
-def handle_message(request, message)
-  #
-end
-
-# 发送被动响应消息'
-#
-# please @rewrite me
-#
-#
-# can rely with instance of those class eg, TextReplyMessage, ImageReplyMessage, VoiceReplyMessage
-# VideoReplyMessage, MusicReplyMessage, NewsReplyMessage
-# quickly generate reply content through call 'reply_#{msg_type}_message(attributes).to_xml' @see 'spec/mp_weixin/server_helper_spec.rb'
-#
-def response_message(request, message, &block)
-  if block_given?
-    block.call(request, message)
-  end
-
-  # reply with
-  # reply_#{msg_type}_message(attributes).to_xml
-  # or with lazy case 'message.reply_{msg_type}_message(attributes)'
-end
-```
+### request weixin api
 
 through `MpWeixin::Client` module request some api interface at 'weixin'
 
@@ -205,9 +169,67 @@ client = MpWeixin::Client.from_hash(token_hash)
 
 client.menu.get_menus
 # more detail check 'spec/mp_weixin/interface/'
+
+### start weixin mp server
+
+mount with Rails application
+
+```ruby
+# /app/services/wechat/response_rule.rb
+# encoding: utf-8
+module ResponseRule
+  # handle corrent data post from weixin
+  #
+  # please @rewrite me
+  def handle_message(request, message)
+    #
+    logger.info "Hey, one request from '#{request.url}' been detected, and content is #{message.as_json}"
+    # did you want save this message ???
+  end
+
+  def response_text_message(request, message)
+    case message.Content
+      when /greet/
+        reply_message = message.reply_text_message({Content: "whosyourdaddy!"})
+        logger.info "response with #{reply_message.to_xml}"
+      else
+        reply_message = message.reply_text_message({Content: "hey, guy you are welcome!"})
+        logger.info "response with #{reply_message.to_xml}"
+    end
+  end
+
+  # 发送被动响应消息'
+  #
+  # please @rewrite me
+  #
+  #
+  # can rely with instance of those class eg, TextReplyMessage, ImageReplyMessage, VoiceReplyMessage
+  # VideoReplyMessage, MusicReplyMessage, NewsReplyMessage
+  # quickly generate reply content through call 'reply_#{msg_type}_message(attributes).to_xml' @see 'spec/mp_weixin/server_helper_spec.rb'
+  #
+  def response_message(request, message, &block)
+    if block_given?
+      block.call(request, message)
+    end
+    send("response_#{message.MsgType}_message", request, message)
+
+    # reply with
+    # reply_#{msg_type}_message(attributes).to_xml
+  end
+end
+
+# load custom response_rule
+class MpWeixin::Server
+  helpers ResponseRule
+end
 ```
 
-TODO: Write usage instructions here
+# routes.rb
+Gxservice::Application.routes.draw do
+  require "mp_weixin"
+  require "#{Rails.root}/app/services/wechat/response_rule"
+  mount MpWeixin::Server, :at => '/weixin'
+end
 
 
 more detail pls check `spec/`
