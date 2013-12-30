@@ -1,6 +1,10 @@
 # encoding: utf-8
 module MpWeixin
   class Server < Sinatra::Base
+    configure :production, :development do
+      enable :logging
+    end
+
     configure :production do
       set :haml, { :ugly=>true }
       set :clean_trace, true
@@ -17,10 +21,10 @@ module MpWeixin
     end
 
     configure :development do
-      $logger = Logger.new(STDOUT)
+      $logger = Logger.new("./log/mp_weixin_#{settings.environment}.log")
     end
 
-    helpers ServerHelper, ResponseRule
+    helpers MpWeixin::ServerHelper, MpWeixin::ResponseRule
 
 
     before '/' do
