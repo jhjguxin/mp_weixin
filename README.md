@@ -287,13 +287,14 @@ class MpWeixin::Server
 end
 ```
 
+```ruby
 # routes.rb
 Gxservice::Application.routes.draw do
   require "mp_weixin"
   require "#{Rails.root}/app/services/wechat/response_rule"
   mount MpWeixin::Server, :at => '/weixin'
 end
-
+```
 
 more detail pls check `spec/`
 
