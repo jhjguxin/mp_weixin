@@ -32,35 +32,35 @@ Or install it yourself as:
 - 上传下载多媒体文件 [TODO]
 
 ### 接收消息
-- 验证消息真实性 [DONE]
-- 接收普通消息 [DONE]
-- 接收事件推送 [DONE]
-- 接收语音识别结果 [DONE]
+- 验证消息真实性 [DONE] [prefer](spec/mp_weixin/server_spec.rb)
+- 接收普通消息 [DONE] [prefer](spec/mp_weixin/server_helper_spec.rb)
+- 接收事件推送 [DONE] [prefer](spec/mp_weixin/server_helper_spec.rb)
+- 接收语音识别结果 [DONE] [prefer](spec/mp_weixin/server_helper_spec.rb)
 
 ### 发送消息
 
-- 发送被动响应消息 [DONE]
-- 发送客服消息 [DONE]
+- 发送被动响应消息 [DONE] [prefer](spec/mp_weixin/server_helper_spec.rb)
+- 发送客服消息 [DONE] [prefer](spec/mp_weixin/interface/message_spec.rb)
 
 ### 用户管理
 
-- 分组管理接口 [DONE]
-- 获取用户基本信息 [DONE]
-- 获取关注者列表 [DONE]
-- 获取用户地理位置 [TODO]
+- 分组管理接口 [DONE] [prefer](spec/mp_weixin/interface/user_spec.rb)
+- 获取用户基本信息 [DONE] [prefer](spec/mp_weixin/interface/user_spec.rb)
+- 获取关注者列表 [DONE] [prefer](spec/mp_weixin/interface/user_spec.rb)
+- 获取用户地理位置 [DONE] [prefer](spec/mp_weixin/models/event.rb)
 - 网页授权获取用户基本信息 [DONE] [prefer](https://github.com/jhjguxin/open_weixin/)
 - 网页获取用户网络状态（JS接口）[NOPLAN]
 
 ### 自定义菜单
 
-- 自定义菜单创建接口 [DONE]
-- 自定义菜单查询接口 [DONE]
-- 自定义菜单删除接口 [DONE]
-- 自定义菜单事件推送 [DONE]
+- 自定义菜单创建接口 [DONE] [prefer](spec/mp_weixin/interface/menu_spec.rb)
+- 自定义菜单查询接口 [DONE] [prefer](spec/mp_weixin/interface/menu_spec.rb)
+- 自定义菜单删除接口 [DONE] [prefer](spec/mp_weixin/interface/menu_spec.rb)
+- 自定义菜单事件推送 [DONE] [prefer](spec/mp_weixin/interface/menu_spec.rb)
 
 ### 推广支持
 
-- 生成带参数的二维码 [DONE]
+- 生成带参数的二维码 [DONE] [prefer](spec/mp_weixin/interface/promotion_spec.rb)
 
 
 ## The Structure
