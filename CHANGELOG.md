@@ -6,8 +6,12 @@
 
 * support 微信公众平台 '基础支持'
 
-* IdentityMap removed. (Arthur Neves)
+* support 微信公众平台 '接收消息'
 
-* Eager load rework. Eager load now doesnt need the identity map to load
-  related documents. A set of preloaders can eager load the associations
-  passed to .includes method. (Arthur Neves)
+* support 微信公众平台 '发送消息'
+
+* support 微信公众平台 '用户管理'
+
+* support 微信公众平台 '自定义菜单'
+
+* support 微信公众平台 '推广支持'
