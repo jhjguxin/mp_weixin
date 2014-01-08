@@ -5,6 +5,8 @@ module MpWeixin
   #
   class Message
     include ActiveModel::Model
+    include ActiveModel::Serialization
+
     attr_accessor :ToUserName, :FromUserName,
                     :CreateTime, :MsgType, :MsgId
 

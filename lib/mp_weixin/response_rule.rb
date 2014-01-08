@@ -8,9 +8,9 @@ module MpWeixin
       data = request.body.read
       message = Message.from_xml(data)
 
-      logger.info "Hey, one request from '#{request.url}' been detected, and content is #{message.as_json}"
-
       if message.present?
+        logger.info "Hey, one request from '#{request.url}' been detected, and content is #{message.try(:as_json)}"
+
         handle_message(request, message)
         response_message(request, message, &block)
       else
